@@ -3,11 +3,11 @@
 
 
 int convertir_entree (char *tab, const char *strhexa) { //--- Fonction de conversion d'entrée hexa
-    int detecteNonHexa = 0;                                 //Variable de test pour une caractère non hexa
-    int compt = 0;                                          //Compteur pour la variable de test, si hexa est de la forme "0x...."", débute le scan après 2
+    int detecteNonHexa = 0;                                     //Variable de test pour une caractère non hexa
+    int compt = 0;                                              //Compteur pour la variable de test, si hexa est de la forme "0x...."", débute le scan après 2
 
     if (strhexa == NULL)    {
-        return 2;                                           //2e erreur : cas où il n'y a pas de valeur pour l'un des 2 hexa à rentrer dans le terminal
+        return 2;                                               //2e erreur : cas où il n'y a pas de valeur pour l'un des 2 hexa à rentrer dans le terminal
     }
     else    {
         if (strhexa[0] == '0' && (strhexa[1] == 'x' || strhexa[1] == 'X'))  {       
