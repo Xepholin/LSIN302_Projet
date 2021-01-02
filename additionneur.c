@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-int convertir_entree (char *tab, char *strhexa) { //--- Fonction de conversion d'entrée hexa
+int convertir_entree (char *tab, const char *strhexa) { //--- Fonction de conversion d'entrée hexa
     int detecteNonHexa = 0;                                 //Variable de test pour une caractère non hexa
     int compt = 0;                                          //Compteur pour la variable de test, si hexa est de la forme "0x...."", débute le scan après 2
 
@@ -125,7 +125,7 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
     }
 }
 
-u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa 
+u_int16_t convertir_sortie (const char *bits) { //--------- Function de convertion de sortie hexa 
     char base16[4];                                     //Initialise tableau dans le résultat de la conversion
     char save[4];                                       //Tableau de sauvegarde pour la transition
     int j = 0;                                          //Compteur à part pour continuer la lecture de "bits" sans repartir de 0 dans boucle pour "while" dans "for"
@@ -137,8 +137,8 @@ u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de 
            compt++;
            j++;
         }
-                                                                                    //Converti 4 bits en hexa
-        if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {
+                         
+        if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {       //Converti 4 bits en hexa
             base16[i] = '0';
         }
         if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 1)   {
@@ -192,10 +192,10 @@ u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de 
 }
 
 
-int main(int argc, char **argv)  {
+int main(int argc, const char **argv)  {
 
-    char *val1 = argv[1];                                       //Récupère les entrées du terminal
-    char *val2 = argv[2];                                       //Récupère les entrées du terminal
+    const char *val1 = argv[1];                                       //Récupère les entrées du terminal
+    const char *val2 = argv[2];                                       //Récupère les entrées du terminal
 
     char tab_val1[16];                                          //Initialise les tableaux pour les futures valeurs binaires ou hexa
     char tab_val2[16];                                          //Initialise les tableaux pour les futures valeurs binaires ou hexa
