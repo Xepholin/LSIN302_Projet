@@ -194,8 +194,8 @@ u_int16_t convertir_sortie (const char *bits) { //--------- Function de converti
 
 int main(int argc, const char **argv)  {
 
-    const char *val1 = argv[1];                                       //Récupère les entrées du terminal
-    const char *val2 = argv[2];                                       //Récupère les entrées du terminal
+    const char *val1 = argv[1];                                       //Récupère les entrées du terminal / pas nécessaire mais ¯\_(ツ)_/¯
+    const char *val2 = argv[2];                                       //Récupère les entrées du terminal / pas nécessaire mais ¯\_(ツ)_/¯
 
     char tab_val1[16];                                          //Initialise les tableaux pour les futures valeurs binaires ou hexa
     char tab_val2[16];                                          //Initialise les tableaux pour les futures valeurs binaires ou hexa
