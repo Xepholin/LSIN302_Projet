@@ -264,7 +264,7 @@ int main(int argc, char **argv)  {
         }
         printf("\n");
     }
-    else    {                                                   //Default erreur : cas où il y a eu une erreur dans la conversion d'un des 2 entrées de terminal
+    else    {                                                   //Default erreur : cas où il y a eu une erreur dans la conversion d'un des 2 entrées du terminal
         printf("ERREUR : erreur de conversion entrée\n");
     }
 
