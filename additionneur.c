@@ -187,7 +187,7 @@ u_int16_t convertir_sortie (const char *bits) { //--------- Function de converti
             base16[i] = 'F';
         }
     }
-    printf("0x%s", base16);     //Affiche le resultat de la conversion base 2 vers base 16      Info : je n'ai pas réussi à printf de la même manière que sur le poly avec "%x"...
+    printf("0x%s", base16);     //Affiche le resultat de la conversion base 2 vers base 16      Info : je n'ai pas réussi à printf de la même manière que sur le poly avec "%x", j'ai voulu faire cette partie du code avec strtol() mais il me retournait 0 à chaque fois, surement une erreur de lecture mais je n'ai pas pu trouver pourquoi, donc je suis passé par un autre moyen...
     return 0;                   //Fin de la function
 }
 
