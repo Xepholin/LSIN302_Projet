@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 
-int convertir_entree (char *tab, char *strhexa) {   //Fonction de conversion d'entrée hexa
-    int detecteNonHexa = 0;                             //Variable de test pour une caractère non hexa
-    int compt = 0;                                      //Compteur pour la variable de test, si hexa est de la forme "0x...."", débute le scan après 2
+int convertir_entree (char *tab, char *strhexa) { //--- Fonction de conversion d'entrée hexa
+    int detecteNonHexa = 0;                                 //Variable de test pour une caractère non hexa
+    int compt = 0;                                          //Compteur pour la variable de test, si hexa est de la forme "0x...."", débute le scan après 2
 
     if (strhexa == NULL)    {
-        return 2;                                       //2e erreur : cas où il n'y a pas de valeur pour l'un des 2 hexa à rentrer dans le terminal
+        return 2;                                           //2e erreur : cas où il n'y a pas de valeur pour l'un des 2 hexa à rentrer dans le terminal
     }
     else    {
         if (strhexa[0] == '0' && (strhexa[1] == 'x' || strhexa[1] == 'X'))  {       
@@ -47,7 +47,7 @@ int convertir_entree (char *tab, char *strhexa) {   //Fonction de conversion d'e
     }
 }
 
-char pl_NAND (char A, char B)   {       //Fonction porte logique NAND
+char pl_NAND (char A, char B)   { //----- Fonction porte logique NAND
     if (A == 0 && B == 0)   {
         return 1;
     }
@@ -63,7 +63,7 @@ char pl_NAND (char A, char B)   {       //Fonction porte logique NAND
     return 2;
 }
 
-char pl_NOR (char A, char B)    {       //Fonction porte logique NOR
+char pl_NOR (char A, char B)    { //----- Fonction porte logique NOR
     if (A == 0 && B == 0)   {
         return 1;
     }
@@ -79,23 +79,23 @@ char pl_NOR (char A, char B)    {       //Fonction porte logique NOR
     return 2;
 }
 
-char pl_XOR (char A, char B)    {       //Fonction porte logique XOR
+char pl_XOR (char A, char B)    { //----- Fonction porte logique XOR
     return pl_NAND(pl_NAND(pl_NAND(A, A), B), pl_NAND(pl_NAND(B, B), A));
 }
 
-char pl_AND (char A, char B)    {       //Fonction porte logique XOR
+char pl_AND (char A, char B)    { //----- Fonction porte logique XOR
     return pl_NAND(pl_NAND(A, B), pl_NAND(A, B));
 }
 
-char pl_OR (char A, char B) {           //Fonction porte logique OR
+char pl_OR (char A, char B)     { //------ Fonction porte logique OR
     return pl_NOR(pl_NOR(A, B), pl_NOR(A, B));
 }
 
-char pl_NOT (char A)    {               //Fonction porte logique NOT
+char pl_NOT (char A)            { //------ Fonction porte logique NOT
     return pl_NOR(A, A);
 }
 
-char add_1b (char A, char B, char Cin, char *Cout)  {       //Function d'addition 1 bit
+char add_1b (char A, char B, char Cin, char *Cout)  { //----- Function d'addition 1 bit
 
     Cout[0] = pl_XOR(Cin, pl_XOR(A, B));                        //Calcul de la somme avec la retenue d'entrée
 
@@ -106,7 +106,7 @@ char add_1b (char A, char B, char Cin, char *Cout)  {       //Function d'additio
     return Cout[0];                                             //Fin de la fonction, retourne de le résultat de la somme
 }
 
-char add_16b (char *A, char *B, char *sum)  {       //Fonction d'additionneur 16 bits
+char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16 bits
     char C[2];                                          //Initialise un tableau pour le résultat de la somme 1 bit et la retenue
     C[1] = 0;                                           //Initialise la retenue à 0
 
@@ -125,7 +125,7 @@ char add_16b (char *A, char *B, char *sum)  {       //Fonction d'additionneur 16
     }
 }
 
-u_int16_t convertir_sortie (char *bits) {           //Function de convertion de sortie hexa 
+u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa 
     char base16[4];                                     //Initialise tableau dans le résultat de la conversion
     char save[4];                                       //Tableau de sauvegarde pour la transition
     int j = 0;                                          //Compteur à part pour continuer la lecture de "bits" sans repartir de 0 dans boucle pour "while" dans "for"
