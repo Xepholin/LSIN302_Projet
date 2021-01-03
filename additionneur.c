@@ -10,15 +10,30 @@ int convertir_entree (char *tab, const char *strhexa) { //--- Fonction de conver
     }
     else    {
         if (strhexa[0] == '0' && (strhexa[1] == 'x' || strhexa[1] == 'X'))  {       
+            if (strhexa[2] == '\0') {
+                return 2;                                                           // 2e erreur : cas où il n'y a pas de valeur avec "0x"
+            }
             compt = 2;                                                              //Initialise le compteur à 2, si hexa est de la forme "0x...."
         }
 
-        for (compt = compt; strhexa[compt] != '\0'; compt++)    {                   //Detecte une caractère non hexa...     Info : je n'ai pas mis les nombres négatifs
-            if ((int)strhexa[compt] >= 71 && (int)strhexa[compt] <= 90) {           //Detecte pour une lettre minuscule, change la valeur de test "detecteNonHexa" sur true et stop la boucle "for"
+        for (compt = compt; strhexa[compt] != '\0'; compt++)    {                   //Detecte une caractère non hexa... si détecter, change la valeur de test "detecteNonHexa" sur true et stop la boucle "for"
+            if ((int)strhexa[compt] >= 0 && (int)strhexa[compt] <= 47)    {         //Detecte ASCII entre 0 et 47
                 detecteNonHexa = 1;
                 break;
             }
-            else if ((int)strhexa[compt] >= 103 && (int)strhexa[compt] <= 122)  {   //Detecte pour une lettre majuscule, ....
+            else if ((int)strhexa[compt] >= 58 && (int)strhexa[compt] <= 64)    {   //Detecte ASCII entre 58 et 64
+                detecteNonHexa = 1;
+                break;
+            }
+            else if ((int)strhexa[compt] >= 71 && (int)strhexa[compt] <= 90) {      //Detecte ASCII entre 71 et 90    
+                detecteNonHexa = 1;
+                break;
+            }
+            else if ((int)strhexa[compt] >= 91 && (int)strhexa[compt] <= 96)    {   //Detecte ASCII entre 91 et 96
+                detecteNonHexa = 1;
+                break;
+            }
+            else if ((int)strhexa[compt] >= 103 && (int)strhexa[compt] <= 127)  {   //Detecte ASCII entre 103 et 127
                 detecteNonHexa = 1;
                 break;
             }
@@ -120,10 +135,12 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
 }
 
 u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa 
-    char base16[4];                                     //Initialise tableau dans le résultat de la conversion
+    char base16[4];                                     //Initialise tableau pour le résultat de la conversion
+    int intBase10 = 0;                                  //Variable de stockage pour la valeur en decimal
     char save[4];                                       //Tableau de sauvegarde pour la transition
     int j = 0;                                          //Compteur à part pour continuer la lecture de "bits" sans repartir de 0 dans boucle pour "while" dans "for"
-    
+    int k = 15;                                         //Compteur pour prendre les bits dans l'ordre pour la conversion de 2 à 10
+
     for (int i = 0; i < 4; i++) {                       //Récupère 4 bits par 4 bits pour les placer dans le tableau "save"
         int compt = 0;                                      //Compteur 4 bits par 4 bits
         while (compt != 4)  {                               //Insère 4 bits dans le tableau "save" à partir de "bits"
@@ -132,7 +149,7 @@ u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de 
            j++;
         }
                          
-        if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {       //Converti 4 bits en hexa
+        if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {                   //Converti 4 bits en hexa
             base16[i] = '0';
         }
         else if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 1)   {
@@ -181,8 +198,26 @@ u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de 
             base16[i] = 'F';
         }
     }
-    printf("0x%s", base16);     //Affiche le resultat de la conversion base 2 vers base 16      Info : je n'ai pas réussi à printf de la même manière que sur le poly avec "%x", j'ai voulu faire cette partie du code avec strtol() mais il me retournait 0 à chaque fois, surement une erreur de lecture mais je n'ai pas pu trouver pourquoi, donc je suis passé par un autre moyen...
-    return 0;                   //Fin de la function
+
+    intBase10 = intBase10 + bits[k] * 1;                                                            //Conversion de binaire vers décimal dans la variable intBase16
+    intBase10 = intBase10 + bits[k-1] * 2;
+    intBase10 = intBase10 + bits[k-2] * 2 * 2;
+    intBase10 = intBase10 + bits[k-3] * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-4] * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-5] * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-6] * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-7] * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-8] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-9] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-10] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-11] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-12] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-13] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-14] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+    intBase10 = intBase10 + bits[k-15] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
+
+    printf("0x%s ou ", base16);     //Affiche le resultat de la conversion base 2 vers base 16      Info : je n'ai pas réussi à printf de la même manière que sur le poly avec "%x", j'ai voulu faire cette partie du code avec strtol() mais il me retournait 0 à chaque fois, surement une erreur de lecture mais je n'ai pas pu trouver pourquoi, donc je suis passé par un autre moyen...
+    return intBase10;               //Fin de la function                                            Edit : c'est bon pour le "printf("%x")" mais pour les multiples de 2, c'est pas terrible, j'aurai pu supprimé les opérations qui s'occupe de base16 mais ^^'
 }
 
 
@@ -204,12 +239,12 @@ int main(int argc, const char **argv)  {
     }
 
     if (!convert_val1 && !convert_val2) {                       //Test s'il y a d'éventuelles erreurs, s'il n'y a pas continue...
-
+//--------------------------------------------
         for (int i = 0; i < 65; i++)    {                       //Affichage de sortie -----
             printf("-");
         }
         printf("\n");
-
+//--------------------------------------------
         printf("1ère valeur = ");                               //Affichage de la 1ère valeur d'entrée en binaire
         for (int i = 0; i < 16; i++)    {
             if (i%4 == 0 && i != 0) {
@@ -218,8 +253,7 @@ int main(int argc, const char **argv)  {
             printf("%d", tab_val1[i]);
         }
         printf("\n");
-
-
+//--------------------------------------------
         printf("2eme valeur = ");                               //Affichage de la 2eme valeur d'entrée en binaire
         for (int i = 0; i < 16; i++)    {
             if (i%4 == 0 && i != 0) {
@@ -228,18 +262,16 @@ int main(int argc, const char **argv)  {
             printf("%d", tab_val2[i]);
         }
         printf("\n");
-
-
+//--------------------------------------------
         for (int i = 0; i < 65; i++)    {                       //Affichage de sortie -----
             printf("-");
         }
         printf("\n");
-
-
+//--------------------------------------------
         char overflow = add_16b(tab_val1, tab_val2, sum);       //Valeur de l'overflow
 
         printf("Le résultat = ");                               //Affichage de la valeur de la somme en hexadécimal
-        convertir_sortie(sum);
+        printf("0x%x", convertir_sortie(sum));
 
         printf(" (");
         for (int i = 0; i < 16; i++)    {                       //Affichage de la valeur de la somme en binaire
@@ -251,12 +283,12 @@ int main(int argc, const char **argv)  {
         printf(") ");
 
         printf("avec un overflow de %d\n", overflow);           //Affichage de la valeur de l'overflow
-
-
+//--------------------------------------------
         for (int i = 0; i < 65; i++)    {                       //Affichage de sortie -----
             printf("-");
         }
         printf("\n");
+//--------------------------------------------
     }
     else    {                                                   //Default erreur : cas où il y a eu une erreur dans la conversion d'un des 2 entrées du terminal
         printf("ERREUR : erreur de conversion entrée\n");
