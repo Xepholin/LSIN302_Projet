@@ -135,49 +135,49 @@ u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de 
         if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {       //Converti 4 bits en hexa
             base16[i] = '0';
         }
-        if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 1)   {
+        else if (save[0] == 0 && save[1] == 0 && save[2] == 0 && save[3] == 1)   {
             base16[i] = '1';
         }
-        if (save[0] == 0 && save[1] == 0 && save[2] == 1 && save[3] == 0)   {
+        else if (save[0] == 0 && save[1] == 0 && save[2] == 1 && save[3] == 0)   {
             base16[i] = '2';
         }
-        if (save[0] == 0 && save[1] == 0 && save[2] == 1 && save[3] == 1)   {
+        else if (save[0] == 0 && save[1] == 0 && save[2] == 1 && save[3] == 1)   {
             base16[i] = '3';
         }
-        if (save[0] == 0 && save[1] == 1 && save[2] == 0 && save[3] == 0)   {
+        else if (save[0] == 0 && save[1] == 1 && save[2] == 0 && save[3] == 0)   {
             base16[i] = '4';
         }
-        if (save[0] == 0 && save[1] == 1 && save[2] == 0 && save[3] == 1)   {
+        else if (save[0] == 0 && save[1] == 1 && save[2] == 0 && save[3] == 1)   {
             base16[i] = '5';
         }
-        if (save[0] == 0 && save[1] == 1 && save[2] == 1 && save[3] == 0)   {
+        else if (save[0] == 0 && save[1] == 1 && save[2] == 1 && save[3] == 0)   {
             base16[i] = '6';
         }
-        if (save[0] == 0 && save[1] == 1 && save[2] == 1 && save[3] == 1)   {
+        else if (save[0] == 0 && save[1] == 1 && save[2] == 1 && save[3] == 1)   {
             base16[i] = '7';
         }
-        if (save[0] == 1 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {
+        else if (save[0] == 1 && save[1] == 0 && save[2] == 0 && save[3] == 0)   {
             base16[i] = '8';
         }
-        if (save[0] == 1 && save[1] == 0 && save[2] == 0 && save[3] == 1)   {
+        else if (save[0] == 1 && save[1] == 0 && save[2] == 0 && save[3] == 1)   {
             base16[i] = '9';
         }
-        if (save[0] == 1 && save[1] == 0 && save[2] == 1 && save[3] == 0)   {
+        else if (save[0] == 1 && save[1] == 0 && save[2] == 1 && save[3] == 0)   {
             base16[i] = 'A';
         }
-        if (save[0] == 1 && save[1] == 0 && save[2] == 1 && save[3] == 1)   {
+        else if (save[0] == 1 && save[1] == 0 && save[2] == 1 && save[3] == 1)   {
             base16[i] = 'B';
         }
-        if (save[0] == 1 && save[1] == 1 && save[2] == 0 && save[3] == 0)   {
+        else if (save[0] == 1 && save[1] == 1 && save[2] == 0 && save[3] == 0)   {
             base16[i] = 'C';
         }
-        if (save[0] == 1 && save[1] == 1 && save[2] == 0 && save[3] == 1)   {
+        else if (save[0] == 1 && save[1] == 1 && save[2] == 0 && save[3] == 1)   {
             base16[i] = 'D';
         }
-        if (save[0] == 1 && save[1] == 1 && save[2] == 1 && save[3] == 0)   {
+        else if (save[0] == 1 && save[1] == 1 && save[2] == 1 && save[3] == 0)   {
             base16[i] = 'E';
         }
-        if (save[0] == 1 && save[1] == 1 && save[2] == 1 && save[3] == 1)   {
+        else if (save[0] == 1 && save[1] == 1 && save[2] == 1 && save[3] == 1)   {
             base16[i] = 'F';
         }
     }
