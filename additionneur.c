@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int convertir_entree (char *tab, const char *strhexa) { //--- Fonction de conversion d'entrée hexa
     int detecteNonHexa = 0;                                     //Variable de test pour une caractère non hexa
     int compt = 0;                                              //Compteur pour la variable de test, si hexa est de la forme "0x...."", débute le scan après 2
