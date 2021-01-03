@@ -111,13 +111,11 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
         sum[i] = add_1b(A[i], B[i], C[1], C);
     }
 
-    sum[16] = '\0';                                     //Fin de la chaîne de caractère
-
     if (C[1] == 1)   {                                  //Regarde si la retenue de sortie est nulle ou pas, si c'est pas le cas, il y a overflow
-        return 1;                                       //Overflow
+        return 1;                                           //Overflow
     }
     else    {
-        return 0;                                       //Fin de la function
+        return 0;                                           //Fin de la function
     }
 }
 
