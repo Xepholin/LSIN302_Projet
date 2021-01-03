@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>       //Je ne savais pas on pouvait utiliser d'autres bibliothèques que ceux suggérer par le poly, mais je l'ai quand même pour plus tard
 
 int convertir_entree (char *tab, const char *strhexa) { //--- Fonction de conversion d'entrée hexa
     int detecteNonHexa = 0;                                     //Variable de test pour une caractère non hexa
@@ -134,12 +135,14 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
     }
 }
 
-u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa 
+u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa  /  Plusieurs moyens utilisés mais pas forcément les plus optimals
     char base16[4];                                     //Initialise tableau pour le résultat de la conversion
     int intBase10 = 0;                                  //Variable de stockage pour la valeur en decimal
+    int intBase10Too = 0;                               //Variable de stockage pour la valeur en decimal, avec <math.h>
     char save[4];                                       //Tableau de sauvegarde pour la transition
     int j = 0;                                          //Compteur à part pour continuer la lecture de "bits" sans repartir de 0 dans boucle pour "while" dans "for"
     int k = 15;                                         //Compteur pour prendre les bits dans l'ordre pour la conversion de 2 à 10
+    int l = 0;                                          //Compteur pour les puissances de 2
 
     for (int i = 0; i < 4; i++) {                       //Récupère 4 bits par 4 bits pour les placer dans le tableau "save"
         int compt = 0;                                      //Compteur 4 bits par 4 bits
@@ -216,8 +219,14 @@ u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de 
     intBase10 = intBase10 + bits[k-14] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
     intBase10 = intBase10 + bits[k-15] * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2;
 
-    printf("0x%s ou ", base16);     //Affiche le resultat de la conversion base 2 vers base 16      Info : je n'ai pas réussi à printf de la même manière que sur le poly avec "%x", j'ai voulu faire cette partie du code avec strtol() mais il me retournait 0 à chaque fois, surement une erreur de lecture mais je n'ai pas pu trouver pourquoi, donc je suis passé par un autre moyen...
-    return intBase10;               //Fin de la function                                            Edit : c'est bon pour le "printf("%x")" mais pour les multiples de 2, c'est pas terrible, j'aurai pu supprimé les opérations qui s'occupe de base16 mais ^^'
+    for (int i = 15; i >=0; i--)    {
+        intBase10Too = intBase10Too + bits[i] * pow(2, l);
+        l++;
+    }
+    
+    printf("0x%s ou ", base16);             //Affiche le resultat de la conversion base 2 vers base 16              Info : je n'ai pas réussi à printf de la même manière que sur le poly avec "%x", j'ai voulu faire cette partie du code avec strtol() mais il me retournait 0 à chaque fois, surement une erreur de lecture mais je n'ai pas pu trouver pourquoi, donc je suis passé par un autre moyen...
+    printf("0x%x ou ", intBase10Too);       //Affiche le resultat en hexa                                           Edit : c'est bon pour le "printf("%x")"
+    return intBase10;                       //Fin de la function
 }
 
 
@@ -270,8 +279,8 @@ int main(int argc, const char **argv)  {
 //--------------------------------------------
         char overflow = add_16b(tab_val1, tab_val2, sum);       //Valeur de l'overflow
 
-        printf("Le résultat = ");                               //Affichage de la valeur de la somme en hexadécimal
-        printf("0x%x", convertir_sortie(sum));
+        printf("Le résultat = ");
+        printf("0x%x", convertir_sortie(sum));                  //Affichage de la valeur de la somme en hexadécimal
 
         printf(" (");
         for (int i = 0; i < 16; i++)    {                       //Affichage de la valeur de la somme en binaire
