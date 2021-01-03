@@ -135,7 +135,7 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
     }
 }
 
-u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa  /  Plusieurs moyens utilisés mais pas forcément les plus optimals
+u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa  /  Plusieurs moyens utilisés, mais pas forcément les plus optimaux
     char base16[4];                                     //Initialise tableau pour le résultat de la conversion
     int intBase10 = 0;                                  //Variable de stockage pour la valeur en decimal
     int intBase10Too = 0;                               //Variable de stockage pour la valeur en decimal, avec <math.h>
