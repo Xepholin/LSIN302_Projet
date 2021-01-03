@@ -99,9 +99,7 @@ char add_1b (char A, char B, char Cin, char *Cout)  { //----- Function d'additio
 
     Cout[0] = pl_XOR(Cin, pl_XOR(A, B));                        //Calcul de la somme avec la retenue d'entrée
 
-    Cin = pl_OR(pl_AND(pl_XOR(A, B), Cin), pl_AND(A, B));       //Calcul de la retenue de sortie
-
-    Cout[1] = Cin;                                              //Stockage de la retenue de sortie dans le pointeur
+    Cout[1] = pl_OR(pl_AND(pl_XOR(A, B), Cin), pl_AND(A, B));       //Calcul de la retenue de sortie et stockage de la retenue de sortie dans le pointeur
 
     return Cout[0];                                             //Fin de la fonction, retourne de le résultat de la somme
 }
@@ -111,8 +109,7 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
     C[1] = 0;                                           //Initialise la retenue à 0
 
     for (int i = 15; i >= 0; i--)   {                   //Calcul sur 16 bits des 2 valeurs hexa
-        C[0] = add_1b(A[i], B[i], C[1], C);
-        sum[i] = C[0];
+        sum[i] = add_1b(A[i], B[i], C[1], C);
     }
 
     sum[16] = '\0';                                     //Fin de la chaîne de caractère
@@ -275,7 +272,7 @@ int main(int argc, const char **argv)  {
         printf("ERREUR : un des paramètres est manquant\n");
     }
     else if (convert_val1 == 3 || convert_val2 == 3)    {       //3e erreur
-        printf("ERREUR : un des paramètres ne représente pas une valeur héxadécimale %c0x....%c\n",'"','"');
+        printf("ERREUR : un des paramètres ne représente pas une valeur héxadécimale %c0x....%c\n",'"','"');                     //:D
     }
     else if (convert_val1 == 4 || convert_val2 == 4)    {       //4e erreur
         printf("ERREUR : un des paramètres n'est pas représentable sur 16 bits\n");
