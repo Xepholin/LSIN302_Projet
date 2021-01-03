@@ -80,7 +80,7 @@ char pl_NOR (char A, char B)    { //----- Fonction porte logique NOR
 }
 
 char pl_XOR (char A, char B)    { //----- Fonction porte logique XOR
-    return pl_NAND(pl_NAND(pl_NAND(A, A), B), pl_NAND(pl_NAND(B, B), A));
+    return pl_NAND(pl_NAND(A, pl_NAND(A, B)), pl_NAND(pl_NAND(A, B), B));
 }
 
 char pl_AND (char A, char B)    { //----- Fonction porte logique XOR
@@ -125,7 +125,7 @@ char add_16b (char *A, char *B, char *sum)  { //----- Fonction d'additionneur 16
     }
 }
 
-u_int16_t convertir_sortie (const char *bits) { //--------- Function de convertion de sortie hexa 
+u_int16_t convertir_sortie (char *bits) { //--------- Function de convertion de sortie hexa 
     char base16[4];                                     //Initialise tableau dans le résultat de la conversion
     char save[4];                                       //Tableau de sauvegarde pour la transition
     int j = 0;                                          //Compteur à part pour continuer la lecture de "bits" sans repartir de 0 dans boucle pour "while" dans "for"
